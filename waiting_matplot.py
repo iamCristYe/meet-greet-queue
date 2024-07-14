@@ -98,18 +98,18 @@ import json
 import math
 
 
-def main():
+def gen_plot(hour_s,hour_e,min_s,min_e,code_left,code_right,data_left_index,data_right_index,right_text,label_left,label_right):
 
-    for hour in range(9, 10):
-        for minute in range(50, 60):
+    for hour in range(hour_s, hour_e):
+        for minute in range(min_s, min_e):
             for second in range(0, 60):
-                code = [
-                    "ZZFA000072300",
-                    "ZZFA000072306",
-                    "ZZFA000072316",
-                    "ZZFA000072295",
-                    "ZZFA000072301",
-                ]
+                # code = [
+                #     "ZZFA000072300",
+                #     "ZZFA000072306",
+                #     "ZZFA000072316",
+                #     "ZZFA000072295",
+                #     "ZZFA000072301",
+                # ]
                 # print(hour,minute,second)
                 file_name = f"0714-{hour-1:02d}{minute:02d}{second:02d}.json"
                 time_text = f"0714-{hour-1:02d}{minute:02d}"
@@ -118,39 +118,66 @@ def main():
                     print(file_name)
                     with open(file_name) as dict:
                         data = json.load(dict)
-                        data = data["timezones"][0]["members"]
-
-                        waitCount = list(
-                            map(lambda x: math.ceil(data[x]["totalCount"]), code)
+                        data_left = data["timezones"][data_left_index]["members"]
+                        data_right = data["timezones"][data_right_index]["members"]
+                        print(data_right)
+                        waitCount_left = list(
+                            map(lambda x: math.ceil(data_left[x]["totalCount"]), code_left)
                         )
-                        waitMinute = list(
-                            map(lambda x: math.ceil(data[x]["totalWait"] / 60), code)
+                        waitMinute_left = list(
+                            map(lambda x: math.ceil(data_left[x]["totalWait"] / 60), code_left)
                         )
-                        values1 = waitMinute
-                        values2 = [0, 0, 0, 0, 0]
+                        waitCount_right = list(
+                            map(lambda x: math.ceil(data_right[x]["totalCount"]), code_right)
+                        )
+                        waitMinute_right = list(
+                            map(lambda x: math.ceil(data_right[x]["totalWait"] / 60), code_right)
+                        )
+                        values1 = waitMinute_left
+                        values2 = waitMinute_right
                         labels1 = list(
                             map(
                                 lambda x, y: f"{x}人、{y}分",
-                                waitCount,
-                                waitMinute,
+                                waitCount_left,
+                                waitMinute_left,
                             )
                         )
-                        labels2 = ["", "", "", "", ""]
+                        labels2 = list(
+                            map(
+                                lambda x, y: f"{x}人、{y}分",
+                                waitCount_right,
+                                waitMinute_right,
+                            )
+                        )
                         left_text = time_text
-                        right_text = "第1部前"
+                        #right_text = "第1部前"
 
                         plot(
                             values1,
                             values2,
                             labels1,
                             labels2,
-                            "第1部",
-                            " ",
+                            label_left,
+                            label_right,
                             time_text,
                             right_text,
                             time_text,
                         )
                         break  # 1 graph every min
 
+
+def main():
+    code1=[
+                    "ZZFA000072300",
+                    "ZZFA000072306",
+                    "ZZFA000072316",
+                    "ZZFA000072295",
+                    "ZZFA000072301",
+                ],
+    code2=["ZZFA000072329","ZZFA000072335","ZZFA000072345","ZZFA000072324","ZZFA000072330"]
+    code3=["ZZFA000072358","ZZFA000072364","ZZFA000072374","ZZFA000072353","ZZFA000072359"]
+    code4=["ZZFA000072387","ZZFA000072393","ZZFA000072403","ZZFA000072382","ZZFA000072388"]
+    code5=["ZZFA000072416","ZZFA000072422","ZZFA000072432","ZZFA000072411","ZZFA000072417"]
+    gen_plot(9,10,50,60,code1,code2,0,1,"第1部前","第1部","")
 
 main()
