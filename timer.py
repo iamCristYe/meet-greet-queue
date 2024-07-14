@@ -6,13 +6,13 @@ def save_curl_result():
     # 定义curl命令
     curl_command = [
         'curl', 
-        '-d', '{"eventId":"e20100355"}', 
+        '-d', '{"eventId":"e23404"}', 
         '-H', 'Content-Type: application/json', 
         '-X', 'POST', 'https://meets.fortunemusic.app/lapi/v5/app/dateTimezoneMessages'
     ]
     
     # 获取当前时间戳
-    timestamp = datetime.now().strftime('%m%d-%H%M')
+    timestamp = datetime.now().strftime('%m%d-%H%M%S')
     
     # 定义输出文件名
     output_file = f'{timestamp}.json'
@@ -30,6 +30,6 @@ print("Script started. Press Ctrl+C to exit.")
 try:
     while True:
         save_curl_result()
-        time.sleep(60)  # 等待60秒
+        time.sleep(10)  # 等待10秒
 except KeyboardInterrupt:
     print("Script stopped.")
