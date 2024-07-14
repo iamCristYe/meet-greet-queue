@@ -3,7 +3,17 @@ import numpy as np
 from matplotlib import font_manager
 
 
-def plot(values1, values2, labels1, labels2, left_text, right_text, file_name):
+def plot(
+    values1,
+    values2,
+    labels1,
+    labels2,
+    label_one,
+    label_two,
+    left_text,
+    right_text,
+    file_name,
+):
     # 下载并加载 Noto Sans CJK JP 字体
     font_path = "NotoSansJP-Regular.ttf"
     font_manager.fontManager.addfont(font_path)
@@ -32,10 +42,20 @@ def plot(values1, values2, labels1, labels2, left_text, right_text, file_name):
 
     # 添加柱状图
     rects1 = ax.bar(
-        x - width / 2, values1, width, label="列1", color=colors1, edgecolor=edgecolor
+        x - width / 2,
+        values1,
+        width,
+        label=label_one,
+        color=colors1,
+        edgecolor=edgecolor,
     )
     rects2 = ax.bar(
-        x + width / 2, values2, width, label="列2", color=colors2, edgecolor=edgecolor
+        x + width / 2,
+        values2,
+        width,
+        label=label_two,
+        color=colors2,
+        edgecolor=edgecolor,
     )
 
     # 添加标记
@@ -92,6 +112,7 @@ def main():
                 ]
                 # print(hour,minute,second)
                 file_name = f"0714-{hour-1:02d}{minute:02d}{second:02d}.json"
+                time_text = f"0714-{hour-1:02d}{minute:02d}"
                 # print(file_name)
                 if os.path.exists(file_name):
                     print(file_name)
@@ -115,19 +136,21 @@ def main():
                             )
                         )
                         labels2 = ["", "", "", "", ""]
-                        left_text = file_name
-                        right_text = "一部前"
+                        left_text = time_text
+                        right_text = "第1部前"
 
                         plot(
                             values1,
                             values2,
                             labels1,
                             labels2,
-                            left_text,
+                            "第1部",
+                            " ",
+                            time_text,
                             right_text,
-                            file_name,
+                            time_text,
                         )
-                        break # 1 graph every min
+                        break  # 1 graph every min
 
 
 main()
