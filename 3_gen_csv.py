@@ -2,7 +2,7 @@ import json
 import os
 
 memberDict = {}
-with open("events.json") as events_json:
+with open("events_processed.json") as events_json:
     events = json.load(events_json)
     for artistArrayDict in events["appGetEventResponse"]["artistArray"]:
         if artistArrayDict["artCode"] == "SA00000001":
