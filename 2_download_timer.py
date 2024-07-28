@@ -6,7 +6,7 @@ def save_curl_result():
     # 定义curl命令
     curl_command = [
         'curl', 
-        '-d', '{"eventId":"e23404"}', 
+        '-d', '{"eventId":"e24082"}', 
         '-H', 'Content-Type: application/json', 
         '-X', 'POST', 'https://meets.fortunemusic.app/lapi/v5/app/dateTimezoneMessages'
     ]

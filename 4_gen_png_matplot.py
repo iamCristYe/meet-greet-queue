@@ -24,15 +24,42 @@ def plot(
 
     # 示例数据
     groups = [
-        "賀喜",
-        "阪口",
-        "井上",
-        "清宮",
-        "遠藤",
+        "五百城茉央",
+        "池田瑛紗",
+        "一ノ瀬美空",
+        "井上和",
+        "岡本姫奈",
+        "小川彩",
+        "川﨑桜",
+        "菅原咲月",
+        "冨里奈央",
+        "中西アルノ",
     ]
-    colors1 = ["#ff9100", "#ff9100", "#fe0500", "#8e00ff", "#fe01a4"]
-    colors2 = ["#02ff00", "#ff9100", "#ffffff", "#e4fa00", "#ffffff"]
-    edgecolor = "black"  # 描边颜色
+    colors1 = [
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+    ]
+    colors2 = [
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+        "#812990",
+    ]
+    edgecolor = "#812990"  # 描边颜色
 
     # 设置字体和画幅大小
     plt.rcParams.update({"font.size": 20, "font.family": "Noto Sans JP"})
@@ -41,7 +68,7 @@ def plot(
     # 设置柱状图
     x = np.arange(len(groups))  # x轴位置
     width = 0.35  # 柱的宽度
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, 60)
 
     # 添加柱状图
     rects1 = ax.bar(
@@ -83,18 +110,37 @@ def plot(
 
     # 添加标签和图例
     ax.set_ylabel("分")
-    ax.set_title("阪口と清宮、最後の握手会の待ち時間")
+    ax.set_title("7/14、握手会の待ち時間")
     ax.set_xticks(x)
     ax.set_xticklabels(groups)
     # 移除默认图例
     # ax.legend()
 
     # 添加自定义文字图例
-    plt.text(0.95, 0.9, f"左    {label_one}", ha='right', va='center', transform=ax.transAxes, fontsize=14, color='black', bbox=dict(facecolor='none', edgecolor='none'))
-    plt.text(0.95, 0.85, f"右    {label_two}", ha='right', va='center', transform=ax.transAxes, fontsize=14, color='black', bbox=dict(facecolor='none', edgecolor='none'))
+    plt.text(
+        0.95,
+        0.9,
+        f"左    {label_one}",
+        ha="right",
+        va="center",
+        transform=ax.transAxes,
+        fontsize=14,
+        color="black",
+        bbox=dict(facecolor="none", edgecolor="none"),
+    )
+    plt.text(
+        0.95,
+        0.85,
+        f"右    {label_two}",
+        ha="right",
+        va="center",
+        transform=ax.transAxes,
+        fontsize=14,
+        color="black",
+        bbox=dict(facecolor="none", edgecolor="none"),
+    )
 
     fig.tight_layout()
-
 
     # 保存图表为PNG文件
     plt.savefig(f"{file_name}.png", format="png")
@@ -157,14 +203,14 @@ def gen_plot(
                         values2 = waitMinute_right
                         labels1 = list(
                             map(
-                                lambda x, y: f"{x}人、{y}分",
+                                lambda x, y: "" if x == 0 else f"{x}人、{y}分",
                                 waitCount_left,
                                 waitMinute_left,
                             )
                         )
                         labels2 = list(
                             map(
-                                lambda x, y: f"{x}人、{y}分",
+                                lambda x, y: "" if x == 0 else f"{x}人、{y}分",
                                 waitCount_right,
                                 waitMinute_right,
                             )
@@ -186,53 +232,30 @@ def gen_plot(
 
 
 def main():
-    code1 = [
-        "ZZFA000072301",
-        "ZZFA000072295",
-        "ZZFA000072316",
-        "ZZFA000072306",
-        "ZZFA000072300",
-    ]
-    code2 = [
-        "ZZFA000072330",
-        "ZZFA000072324",
-        "ZZFA000072345",
-        "ZZFA000072335",
-        "ZZFA000072329",
-    ]
-    code3 = [
-        "ZZFA000072359",
-        "ZZFA000072353",
-        "ZZFA000072374",
-        "ZZFA000072364",
-        "ZZFA000072358",
-    ]
-    code4 = [
-        "ZZFA000072388",
-        "ZZFA000072382",
-        "ZZFA000072403",
-        "ZZFA000072393",
-        "ZZFA000072387",
-    ]
-    code5 = [
-        "ZZFA000072417",
-        "ZZFA000072411",
-        "ZZFA000072432",
-        "ZZFA000072422",
-        "ZZFA000072416",
-    ]
+    prefix = "ZZFA00007"
+    code1 = []
+    code2 = []
+    code3 = []
+    code4 = []
+    code5 = []
+    for i in range(1, 11):
+        code1.append(f"{prefix}{2312+i:04}")
+        code2.append(f"{prefix}{2341+i:04}")
+        code3.append(f"{prefix}{2370+i:04}")
+        code4.append(f"{prefix}{2399+i:04}")
+        code5.append(f"{prefix}{2428+i:04}")
 
     gen_plot(9, 10, 50, 60, code1, code2, 0, 1, "第1部前", "第1部", "第2部")
 
     gen_plot(10, 11, 0, 60, code1, code2, 0, 1, "第1部", "第1部", "第2部")
     gen_plot(11, 12, 0, 31, code1, code2, 0, 1, "第1部", "第1部", "第2部")
 
-    gen_plot(11, 12, 31, 60, code1, code2, 0, 1, "第2部前", "第1部", "第2部")
+    gen_plot(11, 12, 30, 60, code1, code2, 0, 1, "第2部前", "第1部", "第2部")
 
     gen_plot(12, 13, 0, 60, code1, code2, 0, 1, "第2部", "第1部", "第2部")
     gen_plot(13, 14, 0, 31, code1, code2, 0, 1, "第2部", "第1部", "第2部")
 
-    gen_plot(13, 14, 31, 60, code3, code2, 2, 1, "第3部前", "第3部", "第2部")
+    gen_plot(13, 14, 30, 60, code3, code2, 2, 1, "第3部前", "第3部", "第2部")
     gen_plot(14, 15, 0, 31, code3, code2, 2, 1, "第3部前", "第3部", "第2部")
 
     gen_plot(14, 15, 30, 60, code3, code2, 2, 1, "第3部", "第3部", "第2部")
