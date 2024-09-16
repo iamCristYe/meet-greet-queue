@@ -12,3 +12,6 @@ https://meets.fortunemusic.app/lapi/v5/app/serverTime
                                             {
                                                 "mbName": "伊藤理々杏",
                                                 "mbSortNo": 1,
+
+// ffmpeg -framerate 30 -pattern_type glob -i "0915-*.png" -c:v libx264 -r 30 -pix_fmt yuv420p output.mp4
+Use PR

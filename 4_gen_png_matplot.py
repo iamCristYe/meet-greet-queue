@@ -30,6 +30,7 @@ def plot(
         "井上和",
         "岡本姫奈",
         "小川彩",
+        "奥田いろは",
         "川﨑桜",
         "菅原咲月",
         "冨里奈央",
@@ -110,7 +111,7 @@ def plot(
 
     # 添加标签和图例
     ax.set_ylabel("分")
-    ax.set_title("7/14、握手会の待ち時間")
+    ax.set_title("9/15、握手会の待ち時間")
     ax.set_xticks(x)
     ax.set_xticklabels(groups)
     # 移除默认图例
@@ -164,8 +165,8 @@ def gen_plot(
         for minute in range(min_s, min_e):
             for second in range(0, 60):
                 # CST JST
-                file_name = f"0714-{hour-1:02d}{minute:02d}{second:02d}.json"
-                time_text = f"0714-{hour:02d}{minute:02d}"
+                file_name = f"0915-{hour-1:02d}{minute:02d}{second:02d}.json"
+                time_text = f"0915-{hour:02d}{minute:02d}"
 
                 if os.path.exists(file_name):
                     print(file_name)
@@ -232,18 +233,18 @@ def gen_plot(
 
 
 def main():
-    prefix = "ZZFA00007"
+    prefix = "ZZFA00008"
     code1 = []
     code2 = []
     code3 = []
     code4 = []
     code5 = []
-    for i in range(1, 11):
-        code1.append(f"{prefix}{2312+i:04}")
-        code2.append(f"{prefix}{2341+i:04}")
-        code3.append(f"{prefix}{2370+i:04}")
-        code4.append(f"{prefix}{2399+i:04}")
-        code5.append(f"{prefix}{2428+i:04}")
+    for i in range(1, 12):
+        code1.append(f"{prefix}{1604+i:04}")
+        code2.append(f"{prefix}{1629+i:04}")
+        code3.append(f"{prefix}{1654+i:04}")
+        code4.append(f"{prefix}{1679+i:04}")
+        code5.append(f"{prefix}{1704+i:04}")
 
     gen_plot(9, 10, 50, 60, code1, code2, 0, 1, "第1部前", "第1部", "第2部")
 
