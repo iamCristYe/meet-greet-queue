@@ -1,4 +1,4 @@
-name: monitor_6hr
+name: fetch-data-send
 
 on:
   # schedule:
