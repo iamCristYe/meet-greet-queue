@@ -152,7 +152,7 @@ async def main():
     #     "https://example.com/file2",
     # ]  # 替换为你的下载URL列表
     # output_dir = "./downloads"  # 文件下载的保存目录
-    duration_s = 4600
+    duration_s = 8000
     telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
     telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
     # await send_to_telegram(telegram_token, telegram_chat_id)
