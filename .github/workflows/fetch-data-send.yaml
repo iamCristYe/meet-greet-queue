@@ -1,12 +1,12 @@
 name: fetch-data-send
 
 on:
-  # schedule:
-  #   - cron: '*/15 * * * *'  # Every 15 minutes
+  schedule:
+    - cron: '46 * * * *'  # Every 15 minutes
   workflow_dispatch:
 
 jobs:
-  cron:
+  fetch-data-send:
     runs-on: ubuntu-latest
 
     steps:

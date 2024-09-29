@@ -163,6 +163,9 @@ async def main():
     for item in get_tzId():
         tzId_list.append(item["tzId"])
 
+    if len(tzId_list) == 0:
+        return
+
     end_time = datetime.now() + timedelta(seconds=duration_s)
 
     # 下载并处理文件
@@ -175,7 +178,7 @@ async def main():
     create_7z_archive()
 
     # 发送到Telegram频道
-    send_to_telegram(telegram_token, telegram_chat_id)
+    await send_to_telegram(telegram_token, telegram_chat_id)
 
 
 import asyncio
