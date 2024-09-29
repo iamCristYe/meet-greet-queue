@@ -157,7 +157,10 @@ async def main():
     telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
     # await send_to_telegram(telegram_token, telegram_chat_id)
 
-    # return     创建下载目录（如果不存在）
+    tokyo_tz = pytz.timezone("Asia/Tokyo")
+    current_hour = datetime.now(tokyo_tz).hour
+    if current_hour < 8 or current_hour > 21:
+        return
 
     tzId_list = []
     for item in get_tzId():

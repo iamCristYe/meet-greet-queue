@@ -2,7 +2,7 @@ name: fetch-data-send
 
 on:
   schedule:
-    - cron: '46 * * * *'  # Every 15 minutes
+    - cron: '20 * * * *'  # Every 15 minutes
   workflow_dispatch:
 
 jobs:
