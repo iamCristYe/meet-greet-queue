@@ -155,7 +155,7 @@ async def main():
     duration_s = 40  # 设定下载时间为2小时
     telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
     telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
-    await send_to_telegram(telegram_token, telegram_chat_id)
+    # await send_to_telegram(telegram_token, telegram_chat_id)
 
     # return     创建下载目录（如果不存在）
 
