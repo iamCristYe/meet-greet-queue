@@ -97,6 +97,8 @@ def get_tzId():
     else:
         print("No data fetched.")
 
+    return {}
+
 
 # 下载并处理文件
 def download_and_process(tzId):
