@@ -2,7 +2,7 @@ name: fetch-data-5h
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # 15:00
+    - cron: '50 5 * * *'  # 14:50
   workflow_dispatch:
 
 jobs:
