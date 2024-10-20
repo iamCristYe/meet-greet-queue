@@ -1,8 +1,8 @@
-name: fetch-data-1920-2020
+name: fetch-data-1350-1850
 
 on:
   schedule:
-    - cron: '20 10 * * *'  # 19:20
+    - cron: '50 4 * * *'  # 13:50
   workflow_dispatch:
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       env:
            bot_token: ${{ secrets.bot_token }}
            chat_id: ${{ secrets.chat_id }}
-           duration_s: 3600
+           duration_s: 18000
 
 
        

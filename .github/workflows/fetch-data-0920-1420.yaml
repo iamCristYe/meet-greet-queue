@@ -1,4 +1,4 @@
-name: fetch-data-0920-1520
+name: fetch-data-0920-1420
 
 on:
   schedule:
@@ -30,7 +30,7 @@ jobs:
       env:
            bot_token: ${{ secrets.bot_token }}
            chat_id: ${{ secrets.chat_id }}
-           duration_s: 21600
+           duration_s: 18000
 
 
        
