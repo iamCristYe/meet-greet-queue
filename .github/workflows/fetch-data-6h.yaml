@@ -1,4 +1,4 @@
-name: fetch-data-send
+name: fetch-data-6h
 
 on:
   schedule:
