@@ -11,14 +11,14 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.8' # Specify the Python version you need
   
-    - name: Run Python script
+    - name: Run apt and pip
       run: |
         sudo apt update
         sudo apt install p7zip-full
@@ -26,11 +26,11 @@ jobs:
         pip install requests
         pip install pytz
         pip install python-telegram-bot
+
+    - name: Run Python script
+      run: |
         python 3_GitHub_action.py
       env:
            bot_token: ${{ secrets.bot_token }}
            chat_id: ${{ secrets.chat_id }}
            duration_s: 7200
-
-
-       
