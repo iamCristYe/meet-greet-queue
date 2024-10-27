@@ -130,21 +130,28 @@ def download_and_process(tzId):
 
 
 # 创建7z压缩文件
-def create_7z_archive():
+def create_7z_archive(filename_7z):
     tokyo_tz = pytz.timezone("Asia/Tokyo")
     timestamp = datetime.now(tokyo_tz).strftime("%Y%m%d")
-    archive_path = os.path.join(".", timestamp + ".7z")
+    archive_path = os.path.join(".", filename_7z)
     subprocess.run(["7z", "a", archive_path, "*.json"], check=True)  # 调用7z命令
     # return archive_path
 
 
 # 发送压缩文件到Telegram
-async def send_to_telegram(token, chat_id):
-    bot = Bot(token=token)
-    tokyo_tz = pytz.timezone("Asia/Tokyo")
-    timestamp = datetime.now(tokyo_tz).strftime("%Y%m%d")
-    archive_path = os.path.join(".", timestamp + ".7z")
-    await bot.send_document(chat_id=chat_id, document=open(archive_path, "rb"))
+async def send_7z_to_telegram(filename_7z):
+    telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
+    telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
+    bot = Bot(token=telegram_token)
+    archive_path = os.path.join(".", filename_7z)
+    await bot.send_document(chat_id=telegram_chat_id, document=open(archive_path, "rb"))
+
+
+async def send_msg_to_telegram(msg):
+    telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
+    telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
+    bot = Bot(token=telegram_token)
+    await bot.send_message(chat_id=telegram_chat_id, text=msg)
 
 
 async def main():
@@ -154,12 +161,12 @@ async def main():
     #     "https://example.com/file2",
     # ]  # 替换为你的下载URL列表
     # output_dir = "./downloads"  # 文件下载的保存目录
-    duration_s = os.environ["duration_s"] or 8000
+    try:
+        duration_s = os.environ["duration_s"]
+    except:
+        duration_s = 18000
     duration_s = int(duration_s)
-    print(duration_s)
-    telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
-    telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
-    # await send_to_telegram(telegram_token, telegram_chat_id)
+    send_msg_to_telegram(duration_s)
 
     tokyo_tz = pytz.timezone("Asia/Tokyo")
     current_hour = datetime.now(tokyo_tz).hour
@@ -167,6 +174,7 @@ async def main():
         return
 
     tzId_list = []
+    send_msg_to_telegram(tzId_list)
     for item in get_tzId():
         tzId_list.append(item["tzId"])
 
@@ -181,11 +189,16 @@ async def main():
             download_and_process(tzId)
         time.sleep(20)  # 每20s下载一次
 
-    # 创建7z压缩文件
-    create_7z_archive()
+    tokyo_tz = pytz.timezone("Asia/Tokyo")
+    timestamp = datetime.now(tokyo_tz).strftime("%Y%m%d-%H%M")
+    filename_7z = timestamp + ".7z"
 
+    # 创建7z压缩文件
+    create_7z_archive(filename_7z)
+
+    # await send_to_telegram(telegram_token, telegram_chat_id)
     # 发送到Telegram频道
-    await send_to_telegram(telegram_token, telegram_chat_id)
+    await send_7z_to_telegram(filename_7z)
 
 
 import asyncio

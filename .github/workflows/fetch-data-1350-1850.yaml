@@ -29,7 +29,7 @@ jobs:
 
     - name: Run Python script
       run: |
-        python 3_GitHub_action.py
+        python fetch.py
       env:
            bot_token: ${{ secrets.bot_token }}
            chat_id: ${{ secrets.chat_id }}
