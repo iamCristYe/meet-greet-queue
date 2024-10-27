@@ -174,7 +174,7 @@ async def main():
         return
 
     tzId_list = []
-    send_msg_to_telegram(tzId_list)
+    await send_msg_to_telegram(tzId_list)
     for item in get_tzId():
         tzId_list.append(item["tzId"])
 
