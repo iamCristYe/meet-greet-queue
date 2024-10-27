@@ -1,8 +1,6 @@
-name: fetch-data-1820-2020
+name: fetch-data-test
 
 on:
-  schedule:
-    - cron: '20 9 * * *'  # 18:20
   workflow_dispatch:
 
 jobs:
