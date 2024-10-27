@@ -166,7 +166,7 @@ async def main():
     except:
         duration_s = 18000
     duration_s = int(duration_s)
-    await send_msg_to_telegram("duration_s: " + duration_s)
+    await send_msg_to_telegram("duration_s: " + str(duration_s))
 
     tokyo_tz = pytz.timezone("Asia/Tokyo")
     current_hour = datetime.now(tokyo_tz).hour
