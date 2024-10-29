@@ -177,10 +177,11 @@ async def main():
     tzId_dict = get_tzId()
     for item in tzId_dict:
         tzId_list.append(item["tzId"])
-    await send_msg_to_telegram(str(tzId_dict) + "duration_s: " + str(duration_s))
 
     if len(tzId_list) == 0:
         return
+
+    await send_msg_to_telegram(str(tzId_dict) + "\n\nduration_s: " + str(duration_s))
 
     end_time = datetime.now() + timedelta(seconds=duration_s)
 
