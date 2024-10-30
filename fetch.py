@@ -60,18 +60,19 @@ def process_event_data(json_data):
             event_array = artist.get("eventArray", [])
             # 查找eventArray中dateDate为今天的事件
             for event in event_array:
-                for date in event["dateArray"]:
-                    event_date = date.get("dateDate", "")
-                    if event_date == today:  # or True:
-                        # for item in date["timeZoneArray"]: # Fisrt tzId is OK
-                        tz_id = date["timeZoneArray"][0].get("tzId", "")
-                        result_tz_ids.append(
-                            {
-                                "tzId": "e" + str(tz_id),
-                                "name": event["evtName"],
-                                "date": event_date,
-                            }
-                        )
+                if "振替" not in event["evtName"]:
+                    for date in event["dateArray"]:
+                        event_date = date.get("dateDate", "")
+                        if event_date == today:  # or True:
+                            # for item in date["timeZoneArray"]: # Fisrt tzId is OK
+                            tz_id = date["timeZoneArray"][0].get("tzId", "")
+                            result_tz_ids.append(
+                                {
+                                    "tzId": "e" + str(tz_id),
+                                    "name": event["evtName"],
+                                    "date": event_date,
+                                }
+                            )
     print(result_tz_ids)
     return result_tz_ids
 
