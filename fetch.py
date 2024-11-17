@@ -141,11 +141,18 @@ def create_7z_archive(filename_7z):
 
 # 发送压缩文件到Telegram
 async def send_7z_to_telegram(filename_7z):
-    telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
-    telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
-    bot = Bot(token=telegram_token)
-    archive_path = os.path.join(".", filename_7z)
-    await bot.send_document(chat_id=telegram_chat_id, document=open(archive_path, "rb"))
+    while True:
+        try:
+            telegram_token = os.environ["bot_token"]  # 替换为你的Telegram bot token
+            telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
+            bot = Bot(token=telegram_token)
+            archive_path = os.path.join(".", filename_7z)
+            await bot.send_document(
+                chat_id=telegram_chat_id, document=open(archive_path, "rb")
+            )
+            return
+        except:
+            pass
 
 
 async def send_msg_to_telegram(msg):
