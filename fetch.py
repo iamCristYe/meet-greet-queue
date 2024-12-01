@@ -179,12 +179,10 @@ async def main():
     while True:
         current_hour = datetime.now(tokyo_tz).hour
         current_min = datetime.now(tokyo_tz).minute
-        if current_hour < int(os.environ["start_hour"]):
-            time.sleep(60)
-        elif current_min < int(os.environ["start_min"]):
-            time.sleep(60)
-        else:
-            break
+        if current_hour >= int(os.environ["start_hour"]):
+            if current_min >= int(os.environ["start_min"]):
+                break
+        time.sleep(30)
 
     tzId_list = []
     tzId_dict = get_tzId()
