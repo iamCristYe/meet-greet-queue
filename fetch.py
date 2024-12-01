@@ -175,11 +175,16 @@ async def main():
         duration_s = 18000
     duration_s = int(duration_s)
     # await send_msg_to_telegram("duration_s: " + str(duration_s))
-
     tokyo_tz = pytz.timezone("Asia/Tokyo")
-    current_hour = datetime.now(tokyo_tz).hour
-    if current_hour < 9 or current_hour > 21:
-        return
+    while True:
+        current_hour = datetime.now(tokyo_tz).hour
+        current_min = datetime.now(tokyo_tz).minute
+        if current_hour < int(os.environ["start_hour"]):
+            time.sleep(60)
+        elif current_min < int(os.environ["start_min"]):
+            time.sleep(60)
+        else:
+            break
 
     tzId_list = []
     tzId_dict = get_tzId()
