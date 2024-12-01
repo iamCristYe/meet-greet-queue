@@ -63,8 +63,8 @@ def plot(
         "山下瞳月",
     ]
     # color = "#5BBEE4"  # H
-    # color = "#812990"  # N
-    color = "#f19db5"  # S
+    color = "#812990"  # N
+    # color = "#f19db5"  # S
     colors1 = [
         color,
         color,
@@ -95,7 +95,7 @@ def plot(
     plt.rcParams.update({"font.size": 20, "font.family": "Noto Sans JP"})
     fig, ax = plt.subplots(figsize=(19.20, 10.80))  # 设置画幅大小为1920x1080像素
 
-    groups = groups_S
+    groups = groups_N
 
     # 设置柱状图
     x = np.arange(len(groups))  # x轴位置
@@ -142,8 +142,8 @@ def plot(
 
     # 添加标签和图例
     ax.set_ylabel("分")
-    ax.set_title("10月27日、櫻坂46三期生のミーグリの待ち時間")
-    # ax.set_title("10月27日、乃木坂46五期生のミーグリの待ち時間")
+    # ax.set_title("10月27日、櫻坂46三期生のミーグリの待ち時間")
+    ax.set_title("乃木坂46五期生のミーグリの待ち時間")
     # ax.set_title("10月27日、日向坂46四期生のミーグリの待ち時間")
     ax.set_xticks(x)
     ax.set_xticklabels(groups)
@@ -197,8 +197,8 @@ def gen_plot(
     for hour in range(hour_s, hour_e):
         for minute in range(min_s, min_e):
             for second in range(0, 60):
-                file_name = f"e24757_1027-{hour:02d}{minute:02d}{second:02d}.json"
-                time_text = f"20241027-{hour:02d}{minute:02d}"
+                file_name = f"20241124/e24429_1124-{hour:02d}{minute:02d}{second:02d}.json"
+                time_text = f"20241124-{hour:02d}{minute:02d}"
 
                 if os.path.exists(file_name):
                     print(file_name)
@@ -288,8 +288,8 @@ def main():
     code4 = []
     code5 = []
     code6 = []
-    start = 86311
-    period = 27  # N25 H27 S27
+    start = 82099
+    period = 24  # N25 H27 S27
     for i in range(0, 11):
         code1.append(f"{prefix}{start+period*0+i:04}")
         code2.append(f"{prefix}{start+period*1+i:04}")
@@ -300,7 +300,7 @@ def main():
 
     print(code1, code2, code3, code4, code5, code6)
 
-    if False:  # "N"
+    if True:  # "N"
         gen_plot(9, 10, 45, 60, code1, code2, 0, 1, "第1部前", "第1部", "第2部")
 
         gen_plot(10, 11, 0, 60, code1, code2, 0, 1, "第1部", "第1部", "第2部")
@@ -357,7 +357,7 @@ def main():
         gen_plot(19, 20, 0, 60, code5, code6, 4, 5, "第6部", "第5部", "第6部")
         gen_plot(20, 21, 0, 60, code5, code6, 4, 5, "第6部", "第5部", "第6部")
 
-    if True:  # S
+    if False:  # S
         gen_plot(10, 11, 45, 60, code1, code2, 0, 1, "第1部前", "第1部", "第2部")
 
         gen_plot(11, 12, 0, 60, code1, code2, 0, 1, "第1部", "第1部", "第2部")
