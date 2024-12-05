@@ -60,7 +60,7 @@ def process_event_data(json_data):
             event_array = artist.get("eventArray", [])
             # 查找eventArray中dateDate为今天的事件
             for event in event_array:
-                if "振替" not in event["evtName"]:
+                if "フォーチュン坂46" not in event["evtName"]:
                     for date in event["dateArray"]:
                         event_date = date.get("dateDate", "")
                         if event_date == today:  # or True:
