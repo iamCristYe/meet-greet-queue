@@ -162,6 +162,7 @@ async def send_msg_to_telegram(msg):
             telegram_chat_id = os.environ["chat_id"]  # 替换为你的频道或群组ID
             bot = Bot(token=telegram_token)
             await bot.send_message(chat_id=telegram_chat_id, text=msg)
+            return
         except:
             pass
 
