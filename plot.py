@@ -198,9 +198,9 @@ def gen_plot(
         for minute in range(min_s, min_e):
             for second in range(0, 60):
                 file_name = (
-                    f"20250112/e24960_0112-{hour:02d}{minute:02d}{second:02d}.json"
+                    f"20250309/e24975_0309-{hour:02d}{minute:02d}{second:02d}.json"
                 )
-                time_text = f"20250112/20250112-{hour:02d}{minute:02d}"
+                time_text = f"20250309/20250309-{hour:02d}{minute:02d}"
 
                 if os.path.exists(file_name):
                     print(file_name)
@@ -290,8 +290,8 @@ def main():
     code4 = []
     code5 = []
     code6 = []
-    start = 87941  # IOKI MAO
-    period = 22  # N25 H27 S27
+    start = 88282  # IOKI MAO
+    period = 23  # N25 H27 S27
     for i in range(0, 11):
         code1.append(f"{prefix}{start+period*0+i:04}")
         code2.append(f"{prefix}{start+period*1+i:04}")
