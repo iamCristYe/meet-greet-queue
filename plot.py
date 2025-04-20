@@ -23,6 +23,20 @@ def plot(
     plt.rcParams["font.family"] = "Noto Sans JP"
 
     # 示例数据
+    groups_N6 = [
+        "海邉朱莉",  # P1 ZZFA000097459 P2 ZZFA000097464
+        "川端晃菜",
+        "瀬戸口心月",
+        "長嶋凛桜",
+        "矢田萌華",
+        "愛宕心響  ",  # P4 ZZFA000097469 P5 ZZFA000097475
+        "大越ひなの",
+        "小津玲奈",
+        "鈴木佑捺",
+        "増田三莉音",
+        "森平麗心",
+    ]
+
     groups_N = [
         "五百城茉央",
         "池田瑛紗",
@@ -95,7 +109,7 @@ def plot(
     plt.rcParams.update({"font.size": 20, "font.family": "Noto Sans JP"})
     fig, ax = plt.subplots(figsize=(19.20, 10.80))  # 设置画幅大小为1920x1080像素
 
-    groups = groups_N
+    groups = groups_N6
 
     # 设置柱状图
     x = np.arange(len(groups))  # x轴位置
@@ -143,7 +157,7 @@ def plot(
     # 添加标签和图例
     ax.set_ylabel("分")
     # ax.set_title("10月27日、櫻坂46三期生のミーグリの待ち時間")
-    ax.set_title("乃木坂46五期生のミーグリの待ち時間")
+    ax.set_title("乃木坂46、6期生の初めてのミーグリの待ち時間")
     # ax.set_title("10月27日、日向坂46四期生のミーグリの待ち時間")
     ax.set_xticks(x)
     ax.set_xticklabels(groups)
@@ -198,9 +212,9 @@ def gen_plot(
         for minute in range(min_s, min_e):
             for second in range(0, 60):
                 file_name = (
-                    f"20250309/e24975_0309-{hour:02d}{minute:02d}{second:02d}.json"
+                    f"20250420/e25693_0420-{hour:02d}{minute:02d}{second:02d}.json"
                 )
-                time_text = f"20250309/20250309-{hour:02d}{minute:02d}"
+                time_text = f"20250420/20250420-{hour:02d}{minute:02d}"
 
                 if os.path.exists(file_name):
                     print(file_name)
@@ -227,25 +241,37 @@ def gen_plot(
 
                         waitCount_left = list(
                             map(
-                                lambda x: math.ceil(data_left[x]["totalCount"]),
+                                lambda x: math.ceil(
+                                    data_left[x]["totalCount"] if x in data_left else 0
+                                ),
                                 code_left,
                             )
                         )
                         waitMinute_left = list(
                             map(
-                                lambda x: math.ceil(data_left[x]["totalWait"] / 60),
+                                lambda x: math.ceil(
+                                    data_left[x]["totalWait"] / 60
+                                    if x in data_left
+                                    else 0
+                                ),
                                 code_left,
                             )
                         )
                         waitCount_right = list(
                             map(
-                                lambda x: math.ceil(data_right[x]["totalCount"]),
+                                lambda x: math.ceil(
+                                    data_right[x]["totalCount"] if x in data_right else 0
+                                ),
                                 code_right,
                             )
                         )
                         waitMinute_right = list(
                             map(
-                                lambda x: math.ceil(data_right[x]["totalWait"] / 60),
+                                lambda x: math.ceil(
+                                    data_right[x]["totalWait"] / 60
+                                    if x in data_right
+                                    else 0
+                                ),
                                 code_right,
                             )
                         )
@@ -290,23 +316,89 @@ def main():
     code4 = []
     code5 = []
     code6 = []
-    start = 88282  # IOKI MAO
-    period = 23  # N25 H27 S27
-    for i in range(0, 11):
-        code1.append(f"{prefix}{start+period*0+i:04}")
-        code2.append(f"{prefix}{start+period*1+i:04}")
-        code3.append(f"{prefix}{start+period*2+i:04}")
-        code4.append(f"{prefix}{start+period*3+i:04}")
-        code5.append(f"{prefix}{start+period*4+i:04}")
-        code6.append(f"{prefix}{start+period*5+i:04}")
+    # start = 97469 - 6
+    # period = 6
+    # for i in range(0, 11):
+    #     code1.append(f"{prefix}{start+period*0+i:04}")
+    #     code2.append(f"{prefix}{start+period*1+i:04}")
+    #     code3.append(f"{prefix}{start+period*2+i:04}")
+    #     code4.append(f"{prefix}{start+period*3+i:04}")
+    #     code5.append(f"{prefix}{start+period*4+i:04}")
+    #     code6.append(f"{prefix}{start+period*5+i:04}")
 
-    print(code1)
-    print(code2)
-    print(code3)
-    print(code4)
-    print(code5)
-    print(code6)
+    # print(code1)
+    # print(code2)
+    # print(code3)
+    # print(code4)
+    # print(code5)
+    # print(code6)
 
+    code1 = [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ]
+
+    code2 = [
+        "ZZFA000097459",
+        "ZZFA000097460",
+        "ZZFA000097461",
+        "ZZFA000097462",
+        "ZZFA000097463",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ]
+    code3 = [
+        "ZZFA000097464",
+        "ZZFA000097465",
+        "ZZFA000097466",
+        "ZZFA000097467",
+        "ZZFA000097468",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ]
+    code4 = [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "ZZFA000097469",
+        "ZZFA000097470",
+        "ZZFA000097471",
+        "ZZFA000097472",
+        "ZZFA000097473",
+        "ZZFA000097474",
+    ]
+    code5 = [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "ZZFA000097475",
+        "ZZFA000097476",
+        "ZZFA000097477",
+        "ZZFA000097478",
+        "ZZFA000097479",
+        "ZZFA000097480",
+    ]
     if True:  # "N"
         gen_plot(9, 10, 45, 60, code1, code2, 0, 1, "第1部前", "第1部", "第2部")
 
